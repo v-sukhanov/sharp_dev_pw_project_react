@@ -3,6 +3,8 @@ import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FieldValue, FieldValues, useForm } from 'react-hook-form';
+import { StandardInput } from '../../../shared/components/StandardInput';
+import { StandardPasswordInput } from '../../../shared/components/StandardPasswordInput';
 
 
 const signUpSchema = yup.object().shape({
@@ -39,6 +41,26 @@ export const SignUp = () => {
 		<h2 className="mb-8 text-2xl">
 			Sign up
 		</h2>
+		<StandardInput
+			register={register('email', { required: true })}
+			label="Email"
+			error={errors?.email?.message?.toString()}
+		/>
+		<StandardInput
+			register={register('name', { required: true })}
+			label="Name"
+			error={errors?.name?.message?.toString()}
+		/>
+		<StandardPasswordInput
+			register={register('password', { required: true })}
+			label="Password"
+			error={errors?.password?.message?.toString()}
+		/>
+		<StandardPasswordInput
+			register={register('passwordConfirm', { required: true })}
+			label="Confirm Password"
+			error={errors?.passwordConfirm?.message?.toString()}
+		/>
 		{
 			isError &&
             <Alert className="mb-5" severity="error">
