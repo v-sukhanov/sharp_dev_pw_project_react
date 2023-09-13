@@ -6,7 +6,7 @@ export interface ISignUpRequest {
 }
 
 export interface ISignUpResponse {
-	id_token: string;
+	token: string;
 }
 
 export interface ISignInRequest {
@@ -15,7 +15,7 @@ export interface ISignInRequest {
 }
 
 export interface ISignInResponse {
-	id_token: string;
+	token: string;
 }
 
 

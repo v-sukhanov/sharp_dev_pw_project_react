@@ -1,11 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import React from 'react';
-import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
+import React, { FormEvent, useEffect } from 'react';
 import { StandardInput } from '../../../shared/components/StandardInput';
 import * as yup from 'yup';
 import { StandardPasswordInput } from '../../../shared/components/StandardPasswordInput';
+import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
+import { useNavigate } from 'react-router-dom';
+import { useActions } from '../../../store/hooks';
+import { useLazySignInQuery } from '../../../api/endpoints/auth.endpoints';
+import { ISignInResponse } from '../../../models/auth';
 
 const signInSchema = yup.object().shape({
 	email: yup
@@ -19,8 +22,9 @@ const signInSchema = yup.object().shape({
 })
 
 export const SignIn = () => {
-	const isError = false
-	const isLoading = false
+	const [signInMethod, {isLoading, isError, error}] = useLazySignInQuery();
+	const {addToken} = useActions();
+	const navigate = useNavigate()
 
 	const { register, handleSubmit, formState: { errors } } = useForm({
 		mode: "onChange",
@@ -28,7 +32,19 @@ export const SignIn = () => {
 	});
 
 	const handleSignIn = (data: FieldValues) => {
-		console.log('handle')
+		signInMethod({
+			email: data.email,
+			password: data.password
+		}).unwrap()
+			.then((payload: ISignInResponse) => {
+				if (payload) {
+					addToken(payload.token);
+					navigate({
+						pathname: '../../'
+					})
+				}
+			})
+			.catch(e => {})
 	}
 
 	return (
@@ -52,7 +68,7 @@ export const SignIn = () => {
                     <AlertTitle>Error</AlertTitle>
 					{
 						//@ts-ignore
-						error?.data
+						error?.data?.message
 					}
                 </Alert>
 			}

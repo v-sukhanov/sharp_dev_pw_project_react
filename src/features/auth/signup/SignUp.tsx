@@ -8,6 +8,7 @@ import { Alert, AlertTitle, LoadingButton } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../../store/hooks';
 import { useLazySignUpQuery } from '../../../api/endpoints/auth.endpoints';
+import { ISignInResponse, ISignUpResponse } from '../../../models/auth';
 
 const signUpSchema = yup.object().shape({
 	email: yup
@@ -42,16 +43,17 @@ export const SignUp = () => {
 			password: data.password,
 			confirmPassword: data.passwordConfirm
 		}).unwrap()
-			// .then((payload: { id_token: any; }) => {
-			// 	if (payload) {
-			// 		// addToken(payload.id_token);
-			// 		// navigate({
-			// 		// 	pathname: '../../'
-			// 		// })
-			// 	}
-			// })
+			.then((payload: ISignUpResponse) => {
+				if (payload) {
+					addToken(payload.token);
+					navigate({
+						pathname: '../../'
+					})
+				}
+			})
+			.catch(e => {
+			})
 	}
-
 
 	return (
 		<form className="border rounded p-10 shadow bg-white  w-[500px]">
@@ -84,7 +86,7 @@ export const SignUp = () => {
                     <AlertTitle>Error</AlertTitle>
 					{
 						//@ts-ignore
-						error?.data
+						error?.data?.message
 					}
                 </Alert>
 			}

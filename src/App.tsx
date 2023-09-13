@@ -4,12 +4,18 @@ import { Auth } from './features/auth/Auth';
 import { SignUp } from './features/auth/signup/SignUp';
 import { SignIn } from './features/auth/signin/SignIn';
 import { Template } from './template/Template';
+import { NewTransaction } from './features/newTransaction/NewTransaction';
 
 function App() {
   return (
       <div className="min-h-screen">
           <Routes>
               <Route path="/" element={<Template/>}>
+                  <Route path="newTransaction" element={<NewTransaction/>}></Route>
+                  <Route
+                      path="*"
+                      element={<Navigate to="newTransaction" />}
+                  />
               </Route>
 
               <Route path="/auth" element={<Auth/>}>

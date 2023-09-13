@@ -13,7 +13,7 @@ const _apiWithApiWithAuthEndpoint = baseApi.enhanceEndpoints({addTagTypes: ['Aut
 		}),
 		signIn: build.query<ISignInResponse, ISignInRequest>({
 			query: (request: ISignInRequest) => ({
-				url: '/sessions/create',
+				url: 'auth/signin',
 				body: request,
 				method: 'post'
 			})
