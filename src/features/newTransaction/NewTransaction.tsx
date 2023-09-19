@@ -7,6 +7,7 @@ import { NewTransactionAlert } from './NewTransactionAlert';
 import { useLazyUserInfoQuery, useUserInfoQuery } from '../../api/endpoints/user.endpoints';
 import { useLazyCreateTransactionQuery, useLazyUsersQuery } from '../../api/endpoints/transaction.endpoints';
 import { IUser } from '../../models/user';
+import { OutlinedAmountInput } from '../../shared/components/OutlinedAmountInput';
 
 export const NewTransaction = () => {
 	const queryParams = useQueryParams();
@@ -83,6 +84,7 @@ export const NewTransaction = () => {
                 <Typography sx={{marginBottom: '25px'}} variant="h5">
 					{selectedUser.name}
                 </Typography>
+                <OutlinedAmountInput initialValue={initialAmount} key={'amount_input'} amountChange={setAmount}/>
                 <NewTransactionAlert
                     userInfo={userInfo}
                     amount={amount}
