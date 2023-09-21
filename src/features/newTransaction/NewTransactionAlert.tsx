@@ -1,6 +1,6 @@
 import { Alert, AlertTitle } from '@mui/lab';
 import React from 'react';
-import { IUser, IUserInfoResponse } from '../../shared/models/user';
+import { IUserInfoResponse } from '../../models/user';
 
 export interface INewTransactionAlert {
 	showSuccess: boolean;

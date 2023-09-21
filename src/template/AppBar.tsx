@@ -12,6 +12,7 @@ import {
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Menu as MenuIcon } from '@mui/icons-material';
+import { useLazyUserInfoQuery } from '../api/endpoints/user.endpoints';
 
 const pages = [
 	{
@@ -63,6 +64,7 @@ export const ApplicationBar = () => {
 			pathname: '/auth/signin'
 		})
 	}
+	const [getUserInfoRequest, {data: userInfo, isLoading}] = useLazyUserInfoQuery()
 
 
 
@@ -132,6 +134,51 @@ export const ApplicationBar = () => {
 						</Button>
 					))}
 				</Box>
+
+				{
+					!isLoading &&
+                    <Box sx={{ display: 'flex', alignItems: 'center'}}>
+                        <Typography sx={{marginRight: '5px', opacity: .8}}>
+                            Balance:
+                        </Typography>
+                        <Typography sx={{marginRight: '25px', fontWeight: 'bold'}}>
+							{userInfo?.balance} PW
+                        </Typography>
+                        <Box onClick={handleOpenUserMenu}  sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
+                            <Tooltip title="Open settings">
+                                <IconButton sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp"/>
+                                </IconButton>
+                            </Tooltip>
+                            <Typography sx={{marginLeft: '10px'}}>
+								{userInfo?.name}
+                            </Typography>
+                        </Box>
+
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+                            keepMounted
+                            transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+							{settings.map((setting) => (
+								<MenuItem key={setting} onClick={() => handleSelectUserMenu(setting)}>
+									<Typography textAlign="center">{setting}</Typography>
+								</MenuItem>
+							))}
+                        </Menu>
+                    </Box>
+				}
 			</Toolbar>
 		</Container>
 	</AppBar>

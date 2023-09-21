@@ -5,6 +5,7 @@ import { SignUp } from './features/auth/signup/SignUp';
 import { SignIn } from './features/auth/signin/SignIn';
 import { Template } from './template/Template';
 import { NewTransaction } from './features/newTransaction/NewTransaction';
+import { TransactionsList } from './features/transactionsList/TransactionList';
 
 function App() {
   return (
@@ -12,6 +13,11 @@ function App() {
           <Routes>
               <Route path="/" element={<Template/>}>
                   <Route path="newTransaction" element={<NewTransaction/>}></Route>
+                  <Route path="transactions" element={<TransactionsList/>}></Route>
+                  <Route
+                      path=""
+                      element={<Navigate to="newTransaction" />}
+                  />
                   <Route
                       path="*"
                       element={<Navigate to="newTransaction" />}
