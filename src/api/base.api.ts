@@ -3,6 +3,7 @@ import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/react';
 // import { RootState, store } from '../store/store';
 import { tokenActions } from '../store/token.slice';
 import { RootState, store } from '../store/store';
+import * as timers from 'timers';
 
 
 const baseQuery = fetchBaseQuery({
@@ -18,10 +19,10 @@ const baseQuery = fetchBaseQuery({
 })
 const baseQueryWithReauth = async (args: any, api: BaseQueryApi, extraOptions: any) => {
 	let result = await baseQuery(args, api, extraOptions)
-	// @ts-ignore
-	// if (result?.error?.originalStatus === 401) {
-	// 	store.dispatch(tokenActions.removeToken())
-	// }
+	if (result?.error?.status === 401) {
+		api.dispatch(tokenActions.removeToken())
+	}
+
 	return result
 }
 

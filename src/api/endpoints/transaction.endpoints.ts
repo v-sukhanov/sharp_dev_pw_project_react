@@ -6,16 +6,15 @@ import {
 	ICreateTransactionToken
 } from '../../models/transaction';
 
-const PREFIX = '/api/protected';
+const PREFIX = 'transactions';
 
 
 const _apiWithTransactionsEndpoints = baseApi.enhanceEndpoints({addTagTypes: ['Transactions']}).injectEndpoints({
 	endpoints: (build) => ({
 		users: build.query<IUser[], IUsersRequest>({
 			query: (request: IUsersRequest) => ({
-				url: `${PREFIX}/users/list`,
-				body: request,
-				method: 'post'
+				url: `${PREFIX}/userList`,
+				method: 'get',
 			})
 		}),
 		createTransaction: build.query<ICreateTransactionToken, ICreateTransactionRequest>({

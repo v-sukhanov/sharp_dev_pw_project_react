@@ -65,8 +65,9 @@ export const ApplicationBar = () => {
 		})
 	}
 	const [getUserInfoRequest, {data: userInfo, isLoading}] = useLazyUserInfoQuery()
-
-
+	useEffect(() => {
+		getUserInfoRequest()
+	}, []);
 
 	return <AppBar position="static">
 		<Container maxWidth="xl">
