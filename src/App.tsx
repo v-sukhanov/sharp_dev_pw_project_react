@@ -27,13 +27,13 @@ function App() {
               <Route path="/auth" element={<Auth/>}>
                   <Route
                       path=""
-                      element={<Navigate to="signup" />}
+                      element={<Navigate to="signin" />}
                   />
                   <Route path="signup" element={<SignUp/>}></Route>
                   <Route path="signin" element={<SignIn/>}></Route>
                   <Route
                       path="*"
-                      element={<Navigate to="signup" />}
+                      element={<Navigate to="signin" />}
                   />
               </Route>
               <Route

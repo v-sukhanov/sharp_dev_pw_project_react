@@ -19,11 +19,10 @@ const _apiWithTransactionsEndpoints = baseApi.enhanceEndpoints({addTagTypes: ['T
 		}),
 		createTransaction: build.query<ICreateTransactionToken, ICreateTransactionRequest>({
 			query: (request: ICreateTransactionRequest) => ({
-				url: `${PREFIX}/transactions`,
+				url: `${PREFIX}/create`,
 				body: request,
 				method: 'post'
 			}),
-			transformResponse: (response: ICreateTransactionResponse) => response.trans_token
 		}),
 		getTransaction: build.query<ICreateTransactionToken[], void>({
 			query: () => ({

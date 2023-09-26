@@ -56,7 +56,7 @@ export const NewTransaction = () => {
 			return ;
 		}
 		createTransactionRequest({
-			name: selectedUser.name,
+			userId: selectedUser.id,
 			amount
 		})
 			.unwrap()
@@ -85,12 +85,16 @@ export const NewTransaction = () => {
 					{selectedUser.name}
                 </Typography>
                 <OutlinedAmountInput initialValue={initialAmount} key={'amount_input'} amountChange={setAmount}/>
-                <NewTransactionAlert
-                    userInfo={userInfo}
-                    amount={amount}
-                    showSuccess={showSuccess}
-                    isError={isError}
-                ></NewTransactionAlert>
+	            {
+					(showSuccess || isError) &&
+		            <NewTransactionAlert
+			            userInfo={userInfo}
+			            amount={amount}
+			            showSuccess={showSuccess}
+			            isError={isError}
+		            ></NewTransactionAlert>
+	            }
+
                 <LoadingButton
                     loading={isLoading}
                     disabled={amount < 1 || (userInfo?.balance ?? 0) < amount}

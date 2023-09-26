@@ -1,5 +1,5 @@
 export interface ICreateTransactionRequest {
-	name: string;
+	userId: string;
 	amount: number;
 }
 
