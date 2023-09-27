@@ -1,3 +1,4 @@
+
 export interface ICreateTransactionRequest {
 	userId: string;
 	amount: number;
@@ -5,10 +6,16 @@ export interface ICreateTransactionRequest {
 
 export interface ICreateTransactionToken {
 	id: string;
-	date: string;
-	username: string;
+	created: string;
 	amount: number;
-	balance: number;
+	recipientUser: ICreateTransactionTokenUser
+	senderUser: ICreateTransactionTokenUser
+}
+
+export interface ICreateTransactionTokenUser {
+	name: string;
+	id: string;
+	email: string;
 }
 
 export interface ICreateTransactionResponse {

@@ -38,7 +38,6 @@ export const TransactionsList = () => {
 					<TableCell>Date/Time</TableCell>
 					<TableCell>Username</TableCell>
 					<TableCell align="right">Amount</TableCell>
-					<TableCell align="right">balance</TableCell>
 					<TableCell align="center">Repeat</TableCell>
 				</TableRow>
 			</TableHead>
@@ -49,15 +48,14 @@ export const TransactionsList = () => {
 						sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 					>
 						<TableCell component="th" scope="row">
-							{row.date}
+							{row.created}
 						</TableCell>
 						<TableCell component="th" scope="row">
-							{row.username}
+							{row.recipientUser.name}
 						</TableCell>
 						<TableCell align="right">{row.amount}</TableCell>
-						<TableCell align="right">{row.balance}</TableCell>
 						<TableCell align="center">
-							<IconButton onClick={() => handleRepeat(row.username, row.amount)}>
+							<IconButton onClick={() => handleRepeat(row.recipientUser.name, row.amount)}>
 								<Replay/>
 							</IconButton>
 						</TableCell>

@@ -26,14 +26,8 @@ const _apiWithTransactionsEndpoints = baseApi.enhanceEndpoints({addTagTypes: ['T
 		}),
 		getTransaction: build.query<ICreateTransactionToken[], void>({
 			query: () => ({
-				url: `${PREFIX}/transactions`,
+				url: `${PREFIX}/list`,
 				method: 'get'
-			}),
-			transformResponse: (response: {trans_token: ICreateTransactionToken[]}) => response.trans_token.reverse().map(x => {
-				return {
-					...x,
-					amount: x.amount * -1
-				}
 			})
 		})
 	})
