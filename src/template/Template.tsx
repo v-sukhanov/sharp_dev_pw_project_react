@@ -17,7 +17,7 @@ export const Template = () => {
 	}, [id_token])
 	return <div>
 		<ApplicationBar/>
-		<Container maxWidth="sm" sx={{paddingTop: '50px'}}>
+		<Container maxWidth="lg" sx={{paddingTop: '50px'}}>
 			<Box>
 				<Outlet/>
 			</Box>

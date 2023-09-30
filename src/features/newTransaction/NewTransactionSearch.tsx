@@ -13,7 +13,6 @@ export const NewTransactionSearch = ({selectUser, initialSearch}: INewTransactio
 	const [postUserRequest, {data}] = useLazyUsersQuery()
 	const [search, setSearch] = useState(initialSearch ?? '');
 	const debounced = useDebounce(search);
-
 	useEffect(() => {
 		if (debounced) {
 			postUserRequest({

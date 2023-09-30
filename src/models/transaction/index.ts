@@ -4,7 +4,7 @@ export interface ICreateTransactionRequest {
 	amount: number;
 }
 
-export interface ICreateTransactionToken {
+export interface ITransaction {
 	id: string;
 	created: string;
 	amount: number;
@@ -18,6 +18,3 @@ export interface ICreateTransactionTokenUser {
 	email: string;
 }
 
-export interface ICreateTransactionResponse {
-	trans_token: ICreateTransactionToken;
-}

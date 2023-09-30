@@ -2,8 +2,7 @@ import { baseApi } from '../base.api';
 import { IUser, IUserInfoResponse, IUsersRequest } from '../../models/user';
 import {
 	ICreateTransactionRequest,
-	ICreateTransactionResponse,
-	ICreateTransactionToken
+	ITransaction
 } from '../../models/transaction';
 
 const PREFIX = 'transactions';
@@ -17,14 +16,14 @@ const _apiWithTransactionsEndpoints = baseApi.enhanceEndpoints({addTagTypes: ['T
 				method: 'get',
 			})
 		}),
-		createTransaction: build.query<ICreateTransactionToken, ICreateTransactionRequest>({
+		createTransaction: build.query<ITransaction, ICreateTransactionRequest>({
 			query: (request: ICreateTransactionRequest) => ({
 				url: `${PREFIX}/create`,
 				body: request,
 				method: 'post'
 			}),
 		}),
-		getTransaction: build.query<ICreateTransactionToken[], void>({
+		getTransaction: build.query<ITransaction[], void>({
 			query: () => ({
 				url: `${PREFIX}/list`,
 				method: 'get'

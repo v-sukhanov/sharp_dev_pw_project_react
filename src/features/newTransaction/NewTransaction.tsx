@@ -74,7 +74,7 @@ export const NewTransaction = () => {
 		<Typography sx={{marginBottom: '10px'}}>
 			Please select a user for the transaction
 		</Typography>
-		<NewTransactionSearch selectUser={userChanged}/>
+		<NewTransactionSearch selectUser={userChanged} initialSearch={selectedUser?.name ?? ''}/>
 		{
 			selectedUser &&
             <div className="mt-10">
